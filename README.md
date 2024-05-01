@@ -97,3 +97,45 @@ Open [http://localhost:3000](http://localhost:3000).
 # Stop all running containers
 docker kill $(docker ps -aq) && docker rm $(docker ps -aq)
 ```
+
+//
+
+Find IP Address of docker container
+
+docker ps
+
+```
+CONTAINER ID   IMAGE                                     COMMAND                  CREATED          STATUS          PORTS     NAMES
+dec023e3be90   with-docker-compose-app-next-app:latest   "docker-entrypoint.s…"   22 seconds ago   Up 22 seconds             zealous_germain
+```
+
+docker inspect -f "{{ .NetworkSettings.IPAddress }}" [container-name-or-id]
+
+```
+172.17.0.2
+```
+
+confirm server ip is correct by pinging container using bash
+
+ping -c 3 [ip-address]
+
+```
+PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
+
+--- 172.17.0.2 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2068ms
+```
+
+connect to docker container
+
+ssh [username]@[ip-address]
+
+// --
+
+Like what commands do you require to be ran on the server so it loads up nextjs correctly trigger rebuild
+
+sudo su - username
+
+sudo adduser
+
+--- stripe

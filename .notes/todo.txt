@@ -1,0 +1,6 @@
+install docker to server
+
+install the image to server and run it
+
+
+make pm2 work on prod

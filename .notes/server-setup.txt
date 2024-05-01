@@ -1,0 +1,40 @@
+sudo apt update # updates latest packages
+sudo apt upgrade -y # install everything that's downloaded
+
+# create new user for separation
+
+adduser <username>
+
+username: github
+password: github
+
+# add username to root group - this is needed for github actions to work
+
+usermod -aG sudo <username>   # -a add to gourp -G to group "sudo"
+
+# check current user
+
+pwd # show current folder
+
+# switch to new username
+
+sudo su - <username>
+
+create a github token so we can pull the image from github containers to our server without the need to login our github account
+
+create a classic token
+ > https://github.com/settings/tokens/new
+
+ enable
+ write:packages 
+  read:packages
+ delete:packages   # this will delete old packages
+
+docker-pull-image
+ <github_token>
+
+on local machine, login to github docker container registry with ff command
+we will upload this to ghcr.io so we can pull it in the server
+
+docker login --username marloeleven --password <github_token> ghcr.io
+
