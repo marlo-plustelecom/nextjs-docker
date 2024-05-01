@@ -132,8 +132,6 @@ ssh [username]@[ip-address]
 
 // --
 
-Like what commands do you require to be ran on the server so it loads up nextjs correctly trigger rebuild
-
 sudo su - username
 
 sudo adduser

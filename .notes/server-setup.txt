@@ -38,3 +38,22 @@ we will upload this to ghcr.io so we can pull it in the server
 
 docker login --username marloeleven --password <github_token> ghcr.io
 
+docker push ghcr.io/marloeleven/ui-prod:latest
+
+
+step 4: connect to server and install docker
+
+ssh root@146.190.5.77
+
+https://docs.docker.com/engine/install/ubuntu/
+
+
+step 6:
+
+pull docker image
+create docker-compose file for the server that will run the pulled image
+create network (optional)
+
+run docker-compose up
+
+
