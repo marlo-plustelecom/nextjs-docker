@@ -3,7 +3,7 @@ version: "3"
 services:
   ui:
     container_name: ui
-    image: ui-dev
+    image: ghcr.io/${GH_USERNAME}/ui-dev:${UI_VERSION}
     build:
       context: ./ui
       dockerfile: dev.Dockerfile

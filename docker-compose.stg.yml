@@ -2,11 +2,11 @@ version: "3"
 
 services:
   ui:
-    image: ghcr.io/${GH_USERNAME}/ui-prod:${UI_VERSION}
+    image: ghcr.io/${GH_USERNAME}/ui-stg:${UI_VERSION}
     container_name: ui
     build:
       context: ./ui
-      dockerfile: prod.Dockerfile
+      dockerfile: stg.Dockerfile
       args:
         ENV_VARIABLE: ${ENV_VARIABLE}
         NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
