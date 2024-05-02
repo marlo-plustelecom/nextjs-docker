@@ -28,10 +28,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: Deploy the Docker image
 
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.ID_RSA }}
+
+      - name: SSH into VPS and execute Docker commands
         run: |
-          chmod og= $ID_RSA
-          apk update && apk add openssh-client
-          ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker login --username ${{ secrets.GH_USERNAME }} --password ${{ secrets.GH_TOKEN }} ghcr.io"
-          ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker pull $IMAGE"
-          ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "cd ui && git pull"
-          ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "cd ui && yarn start:prod"
+          ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa $SERVER_USER@$SERVER_IP "docker login --username ${{ secrets.GH_USERNAME }} --password ${{ secrets.GH_TOKEN }} ghcr.io"
+          ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa $SERVER_USER@$SERVER_IP "docker pull $IMAGE"
+          ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa $SERVER_USER@$SERVER_IP "cd ui && git pull"
+          ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa $SERVER_USER@$SERVER_IP "cd ui && yarn start:prod"
