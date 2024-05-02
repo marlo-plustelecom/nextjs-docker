@@ -29,7 +29,7 @@ jobs:
       - name: Deploy the Docker image
 
       - name: Install SSH key
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.ID_RSA }}
 
