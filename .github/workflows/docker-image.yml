@@ -33,4 +33,4 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i "$ID_RSA" $SERVER_USER@$SERVER_IP "docker login --username ${{ secrets.GH_USERNAME }} --password ${{ secrets.GH_TOKEN }} ghcr.io"
           ssh -o StrictHostKeyChecking=no -i "$ID_RSA" $SERVER_USER@$SERVER_IP "docker pull $IMAGE"
           ssh -o StrictHostKeyChecking=no -i "$ID_RSA" $SERVER_USER@$SERVER_IP "cd ui && git pull"
-          ssh -o StrictHostKeyChecking=no -i "$ID_RSA" $SERVER_USER@$SERVER_IP "docker compose -f ./docker-compose.prod.yml up -d"
+          ssh -o StrictHostKeyChecking=no -i "$ID_RSA" $SERVER_USER@$SERVER_IP "cd ui && docker compose -f ./docker-compose.prod.yml up -d"
