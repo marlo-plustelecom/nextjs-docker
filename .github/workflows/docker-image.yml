@@ -30,7 +30,9 @@ jobs:
           ssh-private-key: ${{ secrets.ID_RSA }}
       - name: Install SSH key and SSH into VPS and execute Docker commands
         run: |
-          ssh -o StrictHostKeyChecking=no -i "$ID_RSA" root@$SERVER_IP "su - github && docker login --username ${{ secrets.GH_USERNAME }} --password ${{ secrets.GH_TOKEN }} ghcr.io"
-          ssh -o StrictHostKeyChecking=no -i "$ID_RSA" root@$SERVER_IP "su - github && docker pull $IMAGE"
-          ssh -o StrictHostKeyChecking=no -i "$ID_RSA" root@$SERVER_IP "su - github && cd ui && git pull"
-          ssh -o StrictHostKeyChecking=no -i "$ID_RSA" root@$SERVER_IP "su - github && cd ui && yarn start:prod"
+          echo "$ID_RSA_BASE64" | base64 --decode > key.pem
+          chmod 600 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem root@$SERVER_IP "su - github && docker login --username ${{ secrets.GH_USERNAME }} --password ${{ secrets.GH_TOKEN }} ghcr.io"
+          ssh -o StrictHostKeyChecking=no -i key.pem root@$SERVER_IP "su - github && docker pull $IMAGE"
+          ssh -o StrictHostKeyChecking=no -i key.pem root@$SERVER_IP "su - github && cd ui && git pull"
+          ssh -o StrictHostKeyChecking=no -i key.pem root@$SERVER_IP "su - github && cd ui && yarn start:prod"
