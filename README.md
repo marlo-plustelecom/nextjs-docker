@@ -129,6 +129,7 @@ PING 172.17.0.2 (172.17.0.2) 56(84) bytes of data.
 connect to docker container
 
 ssh [username]@[ip-address]
+ssh github@146.190.5.77
 
 // --
 
