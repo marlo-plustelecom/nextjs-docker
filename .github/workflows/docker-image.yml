@@ -25,9 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
-      - name: Deploy the Docker image
-
       - uses: webfactory/ssh-agent@v0.9.0
       - name: Install SSH key
         with:
