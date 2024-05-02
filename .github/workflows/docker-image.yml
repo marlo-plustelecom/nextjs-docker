@@ -31,4 +31,4 @@ jobs:
       - name: Install SSH key and SSH into VPS and execute Docker commands
         run: |
           ssh -o StrictHostKeyChecking=no -i "$ID_RSA" $SERVER_USER@$SERVER_IP "docker login --username ${{ secrets.GH_USERNAME }} --password ${{ secrets.GH_TOKEN }} ghcr.io"
-          pwd
+          ssh -o StrictHostKeyChecking=no -i "$ID_RSA" $SERVER_USER@$SERVER_IP "pwd"
