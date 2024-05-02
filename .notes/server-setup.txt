@@ -10,7 +10,8 @@ password: github
 
 # add username to root group - this is needed for github actions to work
 
-usermod -aG sudo <username>   # -a add to gourp -G to group "sudo"
+usermod -aG sudo <username>   # - a add to gourp -G to group "sudo"
+usermod -aG docker <username> # - allow docker commands without password prompt
 
 # check current user
 
@@ -57,15 +58,25 @@ docker login --username marloeleven --password <github_token> ghcr.io
 
 docker pull ghcr.io/marloeleven/ui-prod:latest
 
-create docker-compose file for the server that will run the pulled image
-create network (optional)
+docker network create nextjs_laravel
 
 run docker-compose up
-
-
 
 step 7:
 
 generate ssh in server(VPS), we will execute external commands via ssh
 
+#generate
 ssh-keygen it rsa -b 4096
+
+#create a copy
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+#show 
+cat ~/.ssh/id_rsa
+
+#Copy the output to your clipboard. Make sure to add a linebreak after -----END RSA PRIVATE KEY-----
+
+#add as ID_RSA environment variables in github repo
+#add SERVER_IP and SERVER_USER as environment variables in github repo
+
